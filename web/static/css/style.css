@@ -1,0 +1,166 @@
+body{ letter-spacing: 0; margin: 0; padding: 0; }
+.links{ width: 960px; min-width: 960px; margin: 5px auto; }
+.links a{ margin: 20px; }
+.header{ height: 10px; width: 1300px; margin: 0 auto; text-align: center; font-size: 20px; }
+
+.container{ position: relative !important; height: 965px; min-height: 965px !important; width: 1300px !important; min-width: 1300px; margin: 0 auto !important; padding: 0 !important; background-color: #CDAF95!important; font-family: Arial, Helvetica; font-size: 12px; line-height: 1.231; text-align: left; overflow: hidden !important; }
+.container .ol-attribution{ display: none; }
+.container table{ border-collapse:collapse; }
+.container td:hover, .container tr:hover{ cursor: default; }
+.container div:hover{ cursor: default; }
+.container select:hover, .container input, .container button{ cursor:pointer; }
+.container .optionDiv{ position: absolute; width: 380px; margin-top: 1px; font-weight: bold; z-index: 50; }
+.optionDiv .block{ display:inline-block; margin: 5px 0 0 10px; }
+.container .mainContent{ height: 630px; width: 1300px; padding: 5px; }
+
+.container #oconusDivRight{  display: inline-block; width: 316px; height: 630px; }
+.regionDiv{ position: relative; margin-bottom: 2px; padding: 0; background-color: #95B9E6; border: 1px solid #000;}
+.container #conusMapDiv{ height: 180px; width: 310px; }
+.container #hawaiiMapDiv{ height: 145px; width: 160px; }
+.container #koreaMapDiv{ height: 145px; width: 145px; }
+.container #alaskaMapDiv{ height: 160px; width: 195px; }
+.container #japanMapDiv{ height: 160px; width: 110px; }
+.container #testBedMapDiv{ height: 133px; width: 195px; margin: 0; }
+.container #puertoRicoMapDiv{ height: 60px; width: 110px; }
+.container #guamMapDiv{ height: 69px; width: 110px; }
+.container #mapdiv{ position: relative; display: inline-block; height: 630px; width: 972px; padding: 0; background-color: #95B9E6; border: 1px solid #000; }
+	.container #layerDiv{ position: absolute; top: 5px; right: 0; height: 15px; width: 60px; padding: 5px; background-color: #EAF8FB; color: #000; z-index: 14; overflow: hidden; }
+	.container #layerDiv:hover{height: 80px; width: 140px; background-color: rgba(234,248,251, 0.9); color: black; box-shadow: -10px 10px 30px #969696; overflow: auto; z-index: 25; }
+	.container #layerDiv .title{ font-size: 120%; font-weight: bold; margin-bottom: 5px; }
+	.container #layerDiv:hover .title{ font-size: 170%; }	
+		.container #NWSregionSpan{  }
+		.container #reflectivitySpan{ }
+	.container #filterDiv{ position: absolute; top: 35px; right: 0; height: 15px; width: 60px; padding: 5px; overflow: hidden; z-index: 14; }
+	.container #filterDiv:hover{height: auto; max-height: 450px; width: auto; max-width: 440px; padding-bottom: 5px; background-color: rgba(234,248,251, 0.9); color: black; box-shadow: -10px 10px 30px #969696; overflow: auto; z-index: 25; }
+	.container #filterDiv .title{ font-size: 120%; font-weight: bold; margin-bottom: 5px; }
+	.container #filterDiv:hover .title{ font-size: 170%; }
+	.container #filterDiv .group{ display: inline-block; margin: 5px 15px; vertical-align: top; color: #000; }
+	.container .group .subgroup{ display: inline-block; vertical-align: top; margin: 0 3px; }
+	.container .group input{ margin: 0; padding: 0; }
+	.container .group div{ margin: 2px 0; cursor: default; }
+	.container .group label{ margin-left: 3px; vertical-align: top; }
+	.container #filterDiv .groupTitle{ font-size: 110%; font-weight: bold; }
+	.container #filterButtonDiv{ margin-top: 10px; text-align: center; background-color: rgba(234,248,251, 0.0); }
+	.container .notFiltered{ background-color: #EAF8FB; color: #000; }
+	.container .filtered{ background-color: #FF0000; color: #FFF; }
+	.container #NWSLegendDiv{ position: absolute; right: 5px; bottom: 5px; height: 140px; width: 85px; background-color: #EAF8FB; border: 0.1em solid #CCC; z-index: 8; }
+		.container #NWSLegendDiv td{ padding: 5px 0 0 5px; vertical-align: middle; }
+		.container #NWSLegendTable{ width: 30px; }
+		.container #alaskaSwatch{ background-color: #FFFFBE; }
+		.container #centralSwatch{ background-color: #FFD37F; }
+		.container #easternSwatch{ background-color: #BEE8FF; }
+		.container #pacificSwatch{ background-color: #E8BEFF; }
+		.container #southernSwatch{ background-color: #FFBEBE; }
+		.container #westernSwatch{ background-color: #D3FFBE; }
+	.container #dataLegend{ position: absolute; left: 5px; bottom: 5px; padding: 5px; min-width: 70px; z-index: 6; background-color: #EAF8FB; }
+	.container #statusTimeDiv{ position: absolute; bottom: 0; left: 0; height: auto; width: 100%; padding-bottom: 0; text-align: center; font-size: 140%; z-index: 10; }
+	.container #radarTimeDiv{ position: absolute; top: 0; left: 0; height: auto; width: 100%; padding-bottom: 0; text-align: center; z-index: 10; }
+	.container .mapLoading{ display: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: url(../images/roc/nl2/ajax-loader.gif) 50% 50% no-repeat; z-index: 900; }	
+.container #mainInfoDiv{ height: 313px; width: auto; margin: 5px 5px 5px 0; padding: 0; position: relative; }
+	.container .infoLoading{ display: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: url(../images/roc/nl2/ajax-loader.gif) 50% 50% no-repeat; z-index: 900; }
+        .container #radarInfoDiv{ height: auto; width: auto; margin-left: 5px; }	
+		.container #tabHeader{ position: relative; height: 30px; width: auto; background: url(../images/roc/nl2/tabPanel.png); background-size: 500px 30px; background-repeat: repeat no-repeat; -webkit-border-radius: 8px 8px 0 0; -moz-border-radius: 8px 8px 0 0; border-radius: 8px 8px 0 0; }
+		.container #tabPanel{ height: 264px; width: auto; margin-bottom: 10px; padding: 10px; background-color: #FFF; background-image: url(../images/roc/nl2/NEXRAD_logo.png); background-position: 99% 5%; background-repeat: no-repeat; }
+/*Popups*/
+.container #clickPopup{ z-index: 990; }
+.container #hoverPopup{ z-index: 991; }
+
+.container .loading{ display: block; }
+.container .roundCorners{ -webkit-border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; }
+.container .roundLeftCorners{ border: 1px solid #C8C8C8; -webkit-border-radius: 5px 0 0 5px; -moz-border-radius: 5px 0 0 5px; border-radius: 5px 0 0 5px; }
+.container #radarStatusTime{ width: 740px; text-align: left; font-size: 130%; }
+
+.container .tabDiv{ display: inline-block; bottom: 0; margin: 6px 0 0 5px; padding: 3px; font-size: 14px; color: #FFF; background: url(../images/roc/nl2/tabButton.png); background-size: 2px 30px; background-repeat: repeat no-repeat; -webkit-border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; border-radius: 6px 6px 0 0; border: 1px solid rgba(114,204,238,1.0); border-bottom: 0; }
+	.container .tabDiv:hover{ cursor:pointer; }
+.container .tabDivSelected{ background: url(../images/roc/nl2/tabButtonSelected.png); background-size: 2px 30px; border: 1px solid #A2D764; border-bottom: 0; }
+.container .dataTable{ width: 720px; border: 1px solid #666699; overflow: visible; }
+.container .descriptionColumn{ min-width: 180px; vertical-align: middle; padding: 1px 5px 1px 5px; border-left: 1px solid #666699; border-bottom: 1px solid #666699; border-top: 1px solid #666699; }
+.container .valueColumn{ min-width: 150px; text-align: center; vertical-align: middle; padding: 1px 5px 1px 5px; border-right: 1px solid #666699; border-bottom: 1px solid #666699; border-top: 1px solid #666699; }
+.container #headerRow{ border-bottom: 1px solid #666699; }
+.container #alarmTable th{ border-top: 1px solid #666699; }
+.container .alarmCell{ width: 350px; border-bottom: 1px solid #666699; text-align: left; padding-left: 10px; }
+.container .radarDetailsDiv{ height: 250px; width: 740px; overflow: auto; }
+.container .green{ background-color: #00FF00; color: #000; }
+.container .yellow{ background-color: rgba(255, 245, 53, 1.0); color: #000; }
+.container .lt_blue{ background-color: #00FFFF; color: #000; }
+.container .purple{ background-color: #800080; color: #000; }
+.container .orange{ background-color: #FF7F27; color: #FFF; }
+.container .red{ background-color: #FF0000; color: #FFF; }
+.container .black{ background-color: #000; color: #FFF; }
+.container .lt_purple{ background-color: rgb(205,156,205); color: #FFF; }
+.container .nodata, .container .grey{ background-color:#C8C8C8; color: #000; }
+.container .gold{ background-color: #CC9966; color: #FFF; }
+.container .fuschia{ background-color: #FF69B4; color: #FFF; }
+.container .blue{ background-color: #0000FF; color: #FFF; }
+.container .pink{ background-color: #FFC0CB; color: #000; }
+.container .hunter{ background-color: rgb(0,142,0); color: #FFF; }
+.container .bronze{ background-color: rgb(153,153,102); color: #FFF; }
+
+.container .light_green_alarm{ background-color: #90EE90; }
+.container .white_alarm{ background-color: #FFF; color: #000; }
+.container .orange_alarm{ background-color: #FFA500; color: #000; }
+.container .yellow_alarm{ background-color: #FFFF00; color: #000; }
+.container .red1_alarm{ background-color: #FF0000; color: #FFF; }
+.container .status{ display: block; float: left; height: auto; width: 40px; margin: 2px; padding: 1px 2px; border: 1px solid #000; text-align: center; vertical-align: middle; font-size: 12px; }
+.container .circlediv{ height: 12px; width: 12px; margin: 1px 6px; border: 1px solid #000; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; }
+
+.container .swatch{ height: 15px; width: 15px; margin: 0; padding: 0;  border: 1px solid #646464; }
+
+.container select::-ms-value{ background: none; color: #000; }
+
+.container .block{ display: inline-block; }
+.container .checkbox{ margin: 0; padding: 0; z-index: 6; }
+.container .checkboxLabel{ vertical-align: top; }
+.container .popupTable{ font-size: 11px; }
+.container .radarInfoCell{ width: 105px; vertical-align: middle; }
+.container .legendTitle{ margin: 0 10px; font-size: 1.3em; }
+.container .bold{ font-weight: bold; }
+.container .center{ text-align: center; }
+.container .dataStale{ color: red; }
+.regionLabel{ position: absolute; bottom: 1px; left: 3px; z-index: 99; font-size: 1.1em; font-weight: bold; }
+/*Popup classes */
+.container .ol-popup-closer { position: absolute; top: 2px; right: 8px; text-decoration: none; }
+.container .ol-popup-closer:hover{ cursor: pointer; }
+.container .ol-popup-closer:after { content: 'X'; }
+/*Common to all popups */
+.container .ol-popup-main{ position: absolute; padding: 5px; background-color: #FFF; border: 1px solid #CCC; border-radius: 10px; font-size: 12px; min-width: 210px; }
+.container .ol-popup-main:after, .ol-popup-main:before{ position: absolute; height: 0; width: 0; border: solid transparent; content: " "; pointer-events: none; }
+.container .ol-popup-main:after{ border-width: 10px; }
+.container .ol-popup-main:before{ border-width: 11px; }
+/*Right of point */
+.container .ol-popup { bottom: 12px; left: -30px; }
+.container .ol-popup:after, .ol-popup:before { top: 100%; }
+.container .ol-popup:after { left: 28px; margin-left: -10px; border-top-color: #FFF; }
+.container .ol-popup:before { left: 28px; margin-left: -11px; border-top-color: #CCC; }
+/*right side of map */
+.container .ol-popup-right { bottom: 12px; left: -190px; }
+.container .ol-popup-right:after, .ol-popup-right:before { top: 100%; }
+.container .ol-popup-right:after { left: 190px; margin-left: -10px; border-top-color: #FFF; }
+.container .ol-popup-right:before { left: 190px; margin-left: -11px; border-top-color: #CCC; }
+/*top of map */
+.container .ol-popup-top { top: 12px; left: -20px; }
+.container .ol-popup-top:after, .ol-popup-top:before { bottom: 100%; }
+.container .ol-popup-top:after { left: 8px; margin-right: -10px; border-bottom-color: #FFF; }
+.container .ol-popup-top:before { left: 8px; margin-right: -11px; border-bottom-color: #CCC; }
+/*top right of map */
+.container .ol-popup-top-right { top: 12px; left: -190px; }
+.container .ol-popup-top-right:after, .ol-popup-top-right:before { bottom: 100%; }
+.container .ol-popup-top-right:after { left: 180px; margin-right: -10px; border-bottom-color: #FFF; }
+.container .ol-popup-top-right:before { left: 180px;  margin-right: -11px; border-bottom-color: #CCC; }
+.container .hidden { display: none !important; visibility: hidden; }
+/*Added for Details page by B. Taylor */
+.container #detailsTitle { font-size: 20px; color: white; text-shadow: 0 1px 1px black; margin-left:20%;margin-right:0; display:inline-block;}
+.container #ICAO { font-size: 20px; color: white; text-shadow: 0 1px 1px black;display:inline-block;margin-left:1%;margin-right:0;}
+.container #detailsHeader { background: linear-gradient(to right, rgba(127,147,209,0) 8%,rgba(127,147,209,1) 23%,rgba(102,124,204,1) 35%,rgba(8,52,230,1) 100%); overflow:hidden; background-color:white; }
+.container #auto-container { color: white; text-shadow: 0 1px 1px black; display:inline-block; }
+.container #start-date-container { width:90px; height:40px;font-weight:400; display:inline-block; }
+.container #end-date-container { width:90px; height:40px;font-weight:400; display:inline-block; }
+.details #radarInfoDiv{ height: auto; width: 475px; margin: 1%; }
+.details .radarDetailsDiv { height: 720px; font-weight:400; width:100%; }
+.details .dataTable { height:auto; width:100%; border: 1px solid #666699; overflow: visible; overflow-y:scroll; }
+.container #radarInfoDiv tr:nth-child(odd):not(.alarm) {
+        background-color: #ccc;
+}
+
+
+

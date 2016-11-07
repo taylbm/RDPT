@@ -1,0 +1,10 @@
+# Editor temporary/working/backup files #
+
+.*.sw[nop]
+.sw[nop]
+*.tmp
+*.vim
+
+# Compiled source #
+
+*.py[ocd]

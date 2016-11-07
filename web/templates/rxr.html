@@ -1,0 +1,119 @@
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible">
+		<title>Radial Data Plotting Tool</title>
+		<meta name="description" content="">
+		<meta name="author" content="Brandon Taylor">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon" />
+		<link rel="stylesheet" type="text/css" href="static/css/style_old1.css">
+                <link rel="stylesheet" href="static/css/jqm.min.css" />
+                <link rel="stylesheet" href="static/css/jquery.mobile.icons.min.css" />
+  		<link rel="stylesheet" href="static/js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
+		<link rel="stylesheet" href="static/air-datepicker-master/dist/css/datepicker.min.css"/>
+	</head>
+	<body>
+		<div data-role="page" data-url="home" class="container">
+                    <div data-role="header" id="detailsHeader" style="overflow:hidden;background-color:white">
+        	        <div class="" style="width:25%; display:inline-block;">
+            	 	     <img style="height:50px" src="static/img/ROC_logo.png">
+        	        </div>
+                        <h1 style="display:inline-block;" id="detailsTitle">Radial Data Plotting Tool</h1>
+		    </div>
+		    <div class="ui-block-d" style="width:100%;">
+			<div style="width:60%;" class="ui-block-a">
+			    <form style="margin-left:5px">
+			        <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
+			   	    <input name="typeSelect" id="RxRN" value="RxRN" type="radio">
+				    <label for="RxRN">Radial-by-Radial Noise</label>
+                                    <input name="typeSelect" id="El" value="El" type="radio">
+                                    <label for="El">Elevation</label>
+                                    <input name="typeSelect" id="Az" value="Az" type="radio">
+                                    <label for="Az">Azimuthal Rate</label>
+                                    <input name="typeSelect" id="azAccel" value="azAccel" type="radio">
+                                    <label for="azAccel">Azimuthal Acceleration</label>
+				    <input name="typeSelect" id="elAz" value="elAz" type="radio">
+				    <label for="elAz">Elevation + Azimuthal Rate</label>
+				</fieldset>
+			    </form>
+			</div>
+			<div style="width:10%;" class="ui-block-b">
+                            <a id="fullscreen-link" href="#fullscreen" class="ui-mini ui-btn ui-corner-all ui-btn-icon-right ui-icon-action ui-shadow ui-btn-inline">Fullscreen</a>
+			</div>
+			<div style="width:10%;" class="ui-block-c">
+                                <select data-mini="true" name="selectICAO">
+                                % for site in context.get("ICAO_list"):
+                                    <option class="ICAO" value="${site}" id="${site}">${site}</option>
+                                % endfor
+                                <option disabled>Test Bed</option>
+                                % for site in context.get("KCRI_list"):
+                                    <option class="ICAO" value="${site}" id="${site}">${site}</option>
+                                % endfor
+                                </select> 
+			</div>
+                        <div id="date-container" style="width:10%;" class="ui-block-d">
+                            <input id="date-pick" type="text" data-language="en" class="datepicker-here" data-position="bottom right" />
+                        </div>
+			<div id="selectContain" style="width:10%;" class="ui-block-e"></div>
+		    </div>
+                    <div style="position:absolute;z-index:10;top:100px;left:950px;text-align:center">
+<h3 style="display:inline-block;margin:0px;">Latest RDA Build:</h3>
+<div style="width: 30px; height: 20px; background: lightpink none repeat scroll 0% 0%; display: inline-block;">16.1</div><div style="width: 30px; height: 20px; background: lightgreen none repeat scroll 0% 0%; display: inline-block;">17.0</div><div style="width: 30px; height: 20px; background: lightseagreen none repeat scroll 0% 0%; display: inline-block;">17.1</div><div style="width: 30px; height: 20px; background: cyan none repeat scroll 0% 0%; display: inline-block;">18.0</div><div style="width: 30px; height: 20px; background: grey none repeat scroll 0% 0%; display: inline-block;">UNK</div><div></div>
+                    </div>
+                    <div style="position:absolute;margin-left:5px;width:100px;top:120px;" id="volNav"></div>
+                    <form style="position:absolute;margin-left:5px;top:225px;margin-top:15px;" id="cutSelect"></form>
+                    <div id="main-plot" style="height:720px; width:1000px; margin:auto;position:absolute;top:130px;left:150px;"></div>
+                    <form id="autoContain" style="left:1155px;top:850px;position:absolute;">
+                        <label><input name="autoAxis" type="checkbox">Auto Axis</label>
+                    </form> 
+                    <div style="position:absolute;top:140px;left:1155px;width:60px;">
+		        <label for="y-max-primary">Primary Y-Axis Max:</label>
+		        <input name="number" pattern="[0-9]*" id="y-max-primary" value="-75" type="number">
+		    </div>
+                    <div style="position:absolute;top:140px;left:1220px;width:60px;">
+                        <label for="y-max-secondary">Secondary Y-Axis Max:</label>
+                        <input name="number" pattern="[0-9]*" id="y-max-secondary" value="" type="number">
+                    </div>
+                    <div style="position:absolute;top:250px;left:1160px;width:125px;">
+                        <h2>Plotting Tips</h2>
+                        <h3>1) Click and Drag to scale the X-Axis.</h3> 
+                        <h3>2) Use the button with three dots in the top right corner of the graph to Export as a JPEG/PNG.</h3>
+                        <h3>3) Use the Fullscreen button to get a graph that fills the full screen and will have a higher resolution when exported as a JPEG/PNG</h3>
+                    </div>
+		    <div style="position:absolute;top:700px;left:1155px;width:60px;">
+		        <label for="y-min-primary">Primary Y-Axis Min:</label>
+		        <input name="number" pattern="[0-9]*" id="y-min-primary" value="-85" type="number">
+		    </div>
+                    <div style="position:absolute;top:700px;left:1220px;width:60px;">
+                        <label for="y-min-secondary">Secondary Y-Axis Min:</label>
+                        <input name="number" pattern="[0-9]*" id="y-min-secondary" value="" type="number">
+                    </div>
+                    <span style="position:absolute;top:855px;left:200px;width:75px;white-space:nowrap;">
+                        <label for="y-min">X-Axis Min:</label>
+                        <input name="number" pattern="[0-9]*" id="x-min" value="" type="number">
+                    </span>
+                    <span style="position:absolute;top:855px;left:1000px;width:75px;white-space:nowrap;">
+                        <label for="x-max">X Axis Max:</label>
+                        <input name="number" pattern="[0-9]*" id="x-max" value="" type="number">
+                    </span>
+		</div>
+		<div data-role="page" id="fullscreen" data-url="fullscreen">
+                    <div data-role="header" class="ui-grid-a" style="overflow:hidden;">
+			<div class="ui-block-a" style="width:20%">
+                            <a href="#home" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-back ui-shadow ui-btn-inline">Back</a>
+			</div>
+                        <h1>Fullscreen Plot</h1>
+                    </div>
+
+		    <div id="fullscreen-plot" style="width:100%; height:800px">
+		</div>
+
+		<!--! end of #container -->
+		<script id="plot-data"></script>
+                <script type="text/javascript" src="static/canvasjs-1.8.1/canvasjs.min.js"></script>                
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+                <script src="static/air-datepicker-master/dist/js/datepicker.min.js"></script>
+                <script src="static/air-datepicker-master/dist/js/i18n/datepicker.en.js"></script>
+		<script src="static/js/radial_plotting.js"></script>
+	</body>

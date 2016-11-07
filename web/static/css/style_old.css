@@ -1,0 +1,131 @@
+.container{ position: absolute; height: 873px; min-height: 873px; width: 1900px; min-width: 1900px; margin: 0px auto; padding: 0px; background-color: #CDAF95; font-family: sans-serif, Arial, Helvetica; font-size: 12px; line-height: 1.231; }
+.container .header{ margin: 0px 0px 5px 0px; padding: 0px 0px 0px 0px; border-bottom: 1px solid #000; text-align: center; font-size: 30px; background-color: #4489CA; }
+.container .ol-attribution{ display: none; }
+.container table{ border-collapse:collapse; }
+.container td:hover, .container tr:hover{ cursor: default; }
+.container div:hover{ cursor: default; }
+.container select:hover, .container input, .container button{ cursor:pointer; }
+.container .panel{ display: inline-block; height: 870px; min-height: 870px; vertical-align: top; margin: 0 3px; border: 1px solid #000; }
+.container #overviewSide{ width: 960px; }
+.container #detailSide{ width: 920px; }
+.container .topDiv{ width: 950px; margin: 0px 5px; padding: 0px; }
+.container .buttonDiv{ display: inline-block; width: 560px; margin-top: 5px; vertical-align: top; }
+.container .topDiv .serverSelectDiv{ position:relative; display: inline-block; font-weight: bold; }
+.topDiv .optionDiv{ display:inline-block; margin-top: 5px; vertical-align: top; font-weight: bold; }
+.optionDiv .block{ display:inline-block; margin: 5px 0px 0px 15px; }
+
+.container .mainContent{ margin: 10px; display:block; }
+.container #mapdiv{ position: relative; display: inline-block; height: 450px; width: 934px; margin: auto; padding: 0px; background-color: #95B9E6; border: 1px solid #000; }/
+/*.container #mapdiv{ position: relative; display: inline-block; height: 550px; width: 934px; margin: auto; padding: 0px; background-color: #95B9E6; border: 1px solid #000; }*/
+	.container #layerDiv{ position: absolute; top: 5px; right: 5px; height: 19px; width: 150px; background-color: #EAF8FB; z-index: 5; }
+		.container #NWSregionSpan{ position: absolute; top: 3px; left: 5px;  }
+	.container #filterDiv{ position: absolute; top: 30px; right: 5px; height: 15px; width: 35px; padding: 5px; overflow: hidden; z-index: 999; }
+	.container #filterDiv:hover{height: 390px; width: 440px; padding-bottom: 5px; background-color: rgba(234,248,251, 0.9); color: black; box-shadow: -10px 10px 30px #969696; overflow: auto; }
+	.container #filterDiv .title{ font-size: 120%; font-weight: bold; margin-bottom: 5px; }
+	.container #filterDiv:hover .title{ font-size: 170%; }
+	.container #filterDiv .group{ display: inline-block; margin: 5px 15px; vertical-align: top; color: #000; }
+	.container .group .subgroup{ display: inline-block; vertical-align: top; margin: 0px 3px; }
+	.container .group input{ margin: 0px; padding: 0px; }
+	.container .group div{ margin: 2px 0px; cursor: default; }
+	.container .group label{ margin-left: 3px; vertical-align: top; }
+	.container #filterDiv .groupTitle{ font-size: 110%; font-weight: bold; }
+	.container #filterButtonDiv{ margin-top: 10px; text-align: center; background-color: rgba(234,248,251, 0.0); }
+	.container .notFiltered{ background-color: #EAF8FB; color: #000; }
+	.container .filtered{ background-color: #FF0000; color: #FFF; }
+	.container #NWSLegendDiv{ position: absolute; right: 5px; bottom: 5px; height: 140px; width: 85px; background-color: #EAF8FB; border: 0.1em solid #CCC; z-index: 5; }
+		.container #NWSLegendDiv td{ padding: 5px 0px 0px 5px; }
+		.container #alaskaSwatch{ background-color: #FFFFBE; }
+		.container #centralSwatch{ background-color: #FFD37F; }
+		.container #easternSwatch{ background-color: #BEE8FF; }
+		.container #pacificSwatch{ background-color: #E8BEFF; }
+		.container #southernSwatch{ background-color: #FFBEBE; }
+		.container #westernSwatch{ background-color: #D3FFBE; }
+	.container #dataLegend{ position: absolute; left: 5px; bottom: 5px; padding: 5px; min-width: 70px; z-index: 20; background-color: #EAF8FB; }
+	.container #statusTimeDiv{ position: absolute; bottom: 5px; left: 220px; height: 16px; width: 475px; font-size: 140%; z-index: 500; }
+	.container .mapLoading{ display: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: url(../images/roc/nl2/ajax-loader.gif) 50% 50% no-repeat; z-index: 900; }	
+.container #mainInfoDiv{ position: relative; }
+	.container .infoLoading{ display: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: url(../images/roc/nl2/ajax-loader.gif) 50% 50% no-repeat; z-index: 900; }	
+	.container #radarInfoDiv{ height: auto; width: 940px; margin: auto; }
+		.container #tabHeader{ height: 30px; width: 100%; position: relative; background: url(../images/roc/nl2/tabPanel.png); background-size: 500px 30px; background-repeat: repeat no-repeat; -webkit-border-radius: 8px 8px 0px 0px; -moz-border-radius: 8px 8px 0px 0px; border-radius: 8px 8px 0px 0px; }
+		.container #tabPanel{ height: 260px; width: 920px; margin-bottom: 10px; padding: 10px; background-color: #FFF; background-image: url(../images/roc/nl2/trip_logo_small.png); background-position: 99% 5%; background-repeat: no-repeat; }
+/*Popups*/
+.container #clickPopup{ z-index: 900; }
+.container #hoverPopup{ z-index: 901; }
+
+.container .loading{ display: block; }
+.container .roundCorners{ -webkit-border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; }
+.container #radarStatusTime{ text-align: left; font-size: 130%; }
+.container .tabDiv{ display: inline-block; bottom: 0; margin: 6px 0px 0px 5px; padding: 3px; font-size: 14px; color: #FFF; background: url(../images/roc/nl2/tabButton.png); background-size: 2px 30px; background-repeat: repeat no-repeat; -webkit-border-radius: 6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; border-radius: 6px 6px 0px 0px; border: 1px solid rgba(114,204,238,1.0); border-bottom: 0; }
+	.container .tabDiv:hover{ cursor:pointer; }
+.container .tabDivSelected{ background: url(../images/roc/nl2/tabButtonSelected.png); background-size: 2px 30px; border: 1px solid #A2D764; border-bottom: 0; }
+.container .dataTable{ width: 720px; overflow: hidden; }
+.container .descriptionColumn{ min-width: 180px; vertical-align: middle; padding: 1px 5px 1px 5px; border-left: 1px solid #666699; border-bottom: 1px solid #666699; border-top: 1px solid #666699; }
+.container .valueColumn{ min-width: 160px; text-align: center; vertical-align: middle; padding: 2px 5px; border-right: 1px solid #666699; border-bottom: 1px solid #666699; border-top: 1px solid #666699; }
+.container #headerRow{ border-bottom: 1px solid #666699; }
+.container #alarmTable th{ border-top: 1px solid #666699; }
+.container .alarmCell{ width: 350px; border-bottom: 1px solid #666699; text-align: left; padding-left: 10px; }
+.container .radarDetailsDiv{ height: 250px; width: 740px; overflow: auto; }
+.container .green{ background-color: #00FF00; color: #000; }
+.container .yellow{ background-color: rgba(255, 245, 53, 1.0); color: #000; }
+.container .lt_blue{ background-color: #00FFFF; color: #000; }
+.container .purple{ background-color: #800080; color: #000; }
+.container .orange{ background-color: #FF7F27; color: #FFF; }
+.container .red{ background-color: #FF0000; color: #FFF; }
+.container .black{ background-color: #000; color: #FFF; }
+.container .lt_purple{ background-color: rgb(205,156,205); color: #FFF; }
+.container .nodata, .container .grey{ background-color:#646464; color: #FFF; }
+.container .gold{ background-color: #CC9966; color: #FFF; }
+.container .fuschia{ background-color: #FF69B4; color: #FFF; }
+.container .blue{ background-color: #0000FF; color: #FFF; }
+.container .pink{ background-color: #FFC0CB; color: #000; }
+.container .hunter{ background-color: rgb(0,142,0); color: #FFF; }
+.container .bronze{ background-color: rgb(153,153,102); color: #FFF; }
+
+.container .light_green_alarm{ background-color: #90EE90; }
+.container .white_alarm{ background-color: #FFF; color: #000; }
+.container .orange_alarm{ background-color: #FFA500; color: #000; }
+.container .yellow_alarm{ background-color: #FFFF00; color: #000; }
+.container .red1_alarm{ background-color: #FF0000; color: #FFF; }
+.container .status{ display: block; float: left; height: auto; width: 40px; margin: 2px; padding: 1px 2px; border: 1px solid #000; text-align: center; vertical-align: middle; font-size: 12px; }
+.container .regionButton{ margin: 3px; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; }
+.container .regionButtonSelected{ border: 3px solid #EEEEEE;}
+.container .circlediv{ height: 12px; width: 12px; margin: 1px 6px; border: 1px solid #000; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; }
+.container .swatch{ width: 15px; height: 15px; border: 1px solid #646464; }
+.container .checkbox{ margin: 0px; padding: 0px; z-index: 6; }
+.container .checkboxLabel{ vertical-align: top; }
+.container .popupTable{ font-size: 11px; }
+.container .radarInfoCell{ width: 105px; vertical-align: middle; }
+.container .legendTitle{ margin: 0px 10px; font-size: 1.3em; }
+.container .bold{ font-weight: bold; }
+.container .center{ text-align: center; }
+.container .block{ display: inline-block; }
+/*Popup classes */
+.container .ol-popup-closer { position: absolute; top: 2px; right: 8px; text-decoration: none; }
+.container .ol-popup-closer:hover{ cursor: pointer; }
+.container .ol-popup-closer:after { content: 'X'; }
+/*Common to all popups */
+.container .ol-popup-main{ position: absolute; padding: 5px; background-color: #FFF; border: 1px solid #CCC; border-radius: 10px; font-size: 12px; min-width: 200px; }
+.container .ol-popup-main:after, .ol-popup-main:before{ position: absolute; height: 0; width: 0; border: solid transparent; content: " "; pointer-events: none; }
+.container .ol-popup-main:after{ border-width: 10px; }
+.container .ol-popup-main:before{ border-width: 11px; }
+/*Right of point */
+.container .ol-popup { bottom: 12px; left: -50px; }
+.container .ol-popup:after, .ol-popup:before { top: 100%; }
+.container .ol-popup:after { left: 48px; margin-left: -10px; border-top-color: #FFF; }
+.container .ol-popup:before { left: 48px; margin-left: -11px; border-top-color: #CCC; }
+/*right side of map */
+.container .ol-popup-right { bottom: 12px; left: -190px; }
+.container .ol-popup-right:after, .ol-popup-right:before { top: 100%; }
+.container .ol-popup-right:after { left: 190px; margin-left: -10px; border-top-color: #FFF; }
+.container .ol-popup-right:before { left: 190px; margin-left: -11px; border-top-color: #CCC; }
+/*top of map */
+.container .ol-popup-top { top: 12px; left: -20px; }
+.container .ol-popup-top:after, .ol-popup-top:before { bottom: 100%; }
+.container .ol-popup-top:after { left: 8px; margin-right: -10px; border-bottom-color: #FFF; }
+.container .ol-popup-top:before { left: 8px; margin-right: -11px; border-bottom-color: #CCC; }
+/*top right of map */
+.container .ol-popup-top-right { top: 12px; left: -190px; }
+.container .ol-popup-top-right:after, .ol-popup-top-right:before { bottom: 100%; }
+.container .ol-popup-top-right:after { left: 180px; margin-right: -10px; border-bottom-color: #FFF; }
+.container .ol-popup-top-right:before { left: 180px;  margin-right: -11px; border-bottom-color: #CCC; }
+.container .hidden { display: none !important; visibility: hidden; }
