@@ -28,19 +28,15 @@ function autoAxis(type,recalc) {
     ;
     chart.render();
 }
+BUILD_COLORS = {"16.1":"lightpink","17":"greenyellow","17.1":"lightgreen","17.2":"lightseagreen","18":"cyan"}
+
 function getBuilds(){
     $.getJSON('/builds',function(data) {
-        $.each(data,function(idx,val) {
-            if (val == 16.1)  
-                $('#'+idx).css('background','lightpink');
-            else if (val == 17) 
-                $('#'+idx).css('background','lightgreen');
-            else if (val == 17.1) 
-                $('#'+idx).css('background','lightseagreen');
-            else if (val == 18) 
-                $('#'+idx).css('background','cyan');
-            else  
-                $('#'+idx).css('background','grey');
+        $.each(data,function(idx,val) { 
+            if (BUILD_COLORS[val.toString()] != undefined)
+                $('#'+idx).css('background',BUILD_COLORS[val.toString()]);
+            else 
+                $('#'+idx).css('background','gray');
         }); 
     });
 }
@@ -82,7 +78,8 @@ function getBuilds(){
 		    innerHTML += '</select>';
 		    $('#selectContain').html(innerHTML).trigger("create");
                 }
-                else { 
+                else {
+                    $('#selectContain').html('') 
                     alert(data["err"])
                 }
 		$('.ui-loader').css('display','none')
@@ -324,10 +321,19 @@ function getBuilds(){
 	}
 	function plotData(type) {
 	    var loadString = '?ICAO='+ICAO+'&date='+fd+'&fname='+fname;
-	    var typeString = '/plot_all' 
+	    var typeString = '/plot_all';
+            var source =  $('#source-switch').val() == "true";
+            sourceString = source ? "&source=ENG" : "&source=AS3"; 
+            fd_split = fd.split('/')
+            var dCheck = new Date(fd_split[2],parseInt(fd_split[0]) - 1,fd_split[1])
+            var dCutoff = new Date(2016,5,2)
+            if (!source && dCheck < dCutoff){
+                alert('LDM formatted Amazon S3 Level 2 only for dates after 1 June 2016')
+                return
+            }
 	    $('.ui-loader').css('display','initial')
 	    $('.Vol').addClass('ui-disabled') 
-	    $.getJSON(typeString+loadString,function(data) {
+	    $.getJSON(typeString+loadString+sourceString,function(data) {
 		if (data["VCP"]) {
 		    redundant = data["redundant"] > 8 ? "_Ch" + (data["redundant"] - 8).toString() : ""
 		    ds = fd.split('/')
@@ -348,7 +354,9 @@ function getBuilds(){
 		    var cutChoice = storeData["VCP"] == data["VCP"] ? cut : "All";
 		    $('#' + cutChoice).prop('checked','true').click();
 		    storeData = data;
-		    plotSwitch(cutChoice,type);
+		    plotSwitch(cutChoice,type); 
+                    sourceCredit = source ? "ROC ENG SPOOL" : "Amazon Web Services";
+                    $('.canvasjs-chart-credit').html("CanvasJS.com | Raw Level-2 Source: " + sourceCredit);
 		 }
 		 else { 
 		     alert(data["err"])
@@ -357,7 +365,6 @@ function getBuilds(){
 		 $('.Vol').removeClass('ui-disabled')
 	    })
 	    .fail(function(jqXHR, textStatus, error) {
-                 console.log(jqXHR, textStatus, error)
 		 $('.ui-loader').css('display','none')
 		 $('.Vol').removeClass('ui-disabled')
 		 alert("Internal Server Error, probably a bad volume.. please try another!")
@@ -409,7 +416,19 @@ function getBuilds(){
 	});
 	$(":mobile-pagecontainer").on( "pagecontainershow", function( event, ui ) {
 	    fullchart.render()
+            $('#plot-width').val($('#fullscreen-plot').width())
+            $('#plot-height').val($('#fullscreen-plot').height())
 	});
+        $('#plot-width').on("change",function() {
+            var width = parseFloat($(this).val());
+            $('#fullscreen-plot').width(width)
+            fullchart.render();
+        });
+        $('#plot-height').on("change",function() {
+            var height = parseFloat($(this).val());
+            $('#fullscreen-plot').height(height)
+            fullchart.render();
+        });
         $('#y-max-primary').on("change",function() {
             var max = parseFloat($(this).val());
             chart.options.axisY.maximum = max;
@@ -447,6 +466,12 @@ function getBuilds(){
                 $('input[name="number"]').removeClass('ui-disabled')
             autoAxis();
         });
+        $('#source-switch').on('slidestop',function() {
+            if ($("#main-plot .canvasjs-chart-credit" ).length > 0)     
+                type = $('input[name="typeSelect"]:checked').val(),
+                plotData(type)
+            ;
+        });
         $('select[name="selectICAO"]').on('change',function() {
             ICAO = $(this).val()
             getDays()
@@ -462,4 +487,5 @@ function getBuilds(){
         });
         $('#elAz').prop("checked","true");
         $('input[name="typeSelect"]').checkboxradio('refresh');
+        $('#source-switch').val('true').slider('refresh')
 });

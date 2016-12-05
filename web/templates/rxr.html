@@ -19,6 +19,13 @@
             	 	     <img style="height:50px" src="static/img/ROC_logo.png">
         	        </div>
                         <h1 style="display:inline-block;" id="detailsTitle">Radial Data Plotting Tool</h1>
+                        <p style="display:inline-block;margin:0px;color:white;text-shadow: 0 1px 1px black;">Level-2 Source:</p>
+                        <form class="source-slider" id="source-container" style="display:inline-block;margin:0px;">
+                            <select name="source-switch" id="source-switch" data-role="slider" data-theme="b">
+                                <option value="false">Amazon S3</option>
+                                <option default="true" value="true">ROC ENG</option>
+                            </select>
+                        </form> 
 		    </div>
 		    <div class="ui-block-d" style="width:100%;">
 			<div style="width:60%;" class="ui-block-a">
@@ -57,8 +64,13 @@
 			<div id="selectContain" style="width:10%;" class="ui-block-e"></div>
 		    </div>
                     <div style="position:absolute;z-index:10;top:100px;left:950px;text-align:center">
-<h3 style="display:inline-block;margin:0px;">Latest RDA Build:</h3>
-<div style="width: 30px; height: 20px; background: lightpink none repeat scroll 0% 0%; display: inline-block;">16.1</div><div style="width: 30px; height: 20px; background: lightgreen none repeat scroll 0% 0%; display: inline-block;">17.0</div><div style="width: 30px; height: 20px; background: lightseagreen none repeat scroll 0% 0%; display: inline-block;">17.1</div><div style="width: 30px; height: 20px; background: cyan none repeat scroll 0% 0%; display: inline-block;">18.0</div><div style="width: 30px; height: 20px; background: grey none repeat scroll 0% 0%; display: inline-block;">UNK</div><div></div>
+                        <h3 style="display:inline-block;margin:0px;">Latest RDA Build:</h3>
+                        <div style="width: 30px; height: 20px; background: lightpink; display: inline-block;">16.1</div>
+                        <div style="width: 30px; height: 20px; background: greenyellow; display: inline-block;">17.0</div>
+                        <div style="width: 30px; height: 20px; background: lightgreen; display: inline-block;">17.1</div>
+                        <div style="width: 30px; height: 20px; background: lightseagreen; display: inline-block;">17.2</div>
+                        <div style="width: 30px; height: 20px; background: cyan; display: inline-block;">18.0</div>
+                        <div style="width: 30px; height: 20px; background: grey; display: inline-block;">UNK</div>
                     </div>
                     <div style="position:absolute;margin-left:5px;width:100px;top:120px;" id="volNav"></div>
                     <form style="position:absolute;margin-left:5px;top:225px;margin-top:15px;" id="cutSelect"></form>
@@ -74,11 +86,12 @@
                         <label for="y-max-secondary">Secondary Y-Axis Max:</label>
                         <input name="number" pattern="[0-9]*" id="y-max-secondary" value="" type="number">
                     </div>
-                    <div style="position:absolute;top:250px;left:1160px;width:125px;">
+                    <div style="position:absolute;top:225px;left:1160px;width:125px;">
                         <h2>Plotting Tips</h2>
-                        <h3>1) Click and Drag to scale the X-Axis.</h3> 
-                        <h3>2) Use the button with three dots in the top right corner of the graph to Export as a JPEG/PNG.</h3>
-                        <h3>3) Use the Fullscreen button to get a graph that fills the full screen and will have a higher resolution when exported as a JPEG/PNG</h3>
+                        <h4>1) Click and Drag to scale the X-Axis.</h4> 
+                        <h4>2) Use the button with three dots in the top right corner of the graph to Export as a JPEG/PNG.</h4>
+                        <h4>3) Use the Fullscreen button to get a graph that fills the full screen and will have a higher resolution when exported as a JPEG/PNG</h4> 
+                        <h4>4) Amazon S3 is intended for backup purposes only. To learn more about NEXRAD Data on the Amazon S3 bucket, <a target="_blank" href="https://aws.amazon.com/noaa-big-data/nexrad/">Click Here</a></h4>
                     </div>
 		    <div style="position:absolute;top:700px;left:1155px;width:60px;">
 		        <label for="y-min-primary">Primary Y-Axis Min:</label>
@@ -97,15 +110,22 @@
                         <input name="number" pattern="[0-9]*" id="x-max" value="" type="number">
                     </span>
 		</div>
-		<div data-role="page" id="fullscreen" data-url="fullscreen">
-                    <div data-role="header" class="ui-grid-a" style="overflow:hidden;">
-			<div class="ui-block-a" style="width:20%">
+		<div style="overflow-x:scroll" data-role="page" id="fullscreen" data-url="fullscreen">
+                    <div data-role="header" class="ui-grid-d" style="overflow:hidden;">
+			<div class="ui-block-a">
                             <a href="#home" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-back ui-shadow ui-btn-inline">Back</a>
 			</div>
-                        <h1>Fullscreen Plot</h1>
+                        <h1 class="ui-block-b" style="margin-left:10%;margin-right:10%;">Fullscreen Plot</h1>
+                        <div class="ui-block-c">
+                            <label style="display:inline-block" for="plot-width">Width</label>
+                            <input style="display:inline-block" name="number" pattern="[0-9]*" id="plot-width" value="" type="number">
+                        </div>
+                        <div class="ui-block-d">
+                            <label style="display:inline-block" for="plot-width">Height</label>
+                            <input style="display:inline-block" name="number" pattern="[0-9]*" id="plot-height" value="" type="number">
+                        </div>
                     </div>
-
-		    <div id="fullscreen-plot" style="width:100%; height:800px">
+		    <div id="fullscreen-plot" style="width:100%; height:800px"></div>
 		</div>
 
 		<!--! end of #container -->

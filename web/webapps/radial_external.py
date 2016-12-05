@@ -18,10 +18,12 @@ Currently it outputs the following:
 import bz2
 from struct import unpack
 import sys
+import io
 import os
 import argparse
 import numpy as np
 from math import isnan
+from urllib import urlopen
 
 VOLUME_HEADER_SIZE = 24
 MESSAGE_HEADER_SIZE = 16
@@ -110,27 +112,31 @@ class Radial(object):
         self.collect_time = []
         self.az = []
         self.precision = precision
-        self.LDM_version = filename.split('V0')[1].replace('.raw','')
-
+        self._pos = 0
+        self.offset = precision
     def retrieve_build(self):
         try:
-            with open(self.filename, 'rb') as raw_file:
-                control_word = raw_file.read(CONTROL_WORD_SIZE)
-                metarecord_size = abs(unpack('>i', control_word)[0])
-                raw_file.seek(MESSAGE_HEADER_SIZE+RPG_ADDED_BYTES)
-                metarecord = raw_file.read(metarecord_size)
-                metadata = bz2.decompress(metarecord)
-                if metadata:
-                    header = Message_Header(metadata,0)
-                    self.redundant = header.channel
-                    self.metadata = metadata
-                    self._rda_build()
-                    out =  {
-                    "build":self.build,
-                    }
-                else:
-                    print INCOMP_ERR_MSG
-                    out = {"build":False,"err":(INCOMP_ERR_MSG)}
+            raw_file = urlopen(self.filename) 
+            print raw_file.read(VOLUME_HEADER_SIZE*2)
+            control_word = raw_file.read(CONTROL_WORD_SIZE)
+            print control_word
+            metarecord_size = abs(unpack('>i', control_word)[0])
+            print metarecord_size
+            #print raw_file.read(12)#MESSAGE_HEADER_SIZE + RPG_ADDED_BYTES)
+            metarecord = raw_file.read(metarecord_size)
+            metadata = bz2.decompress(metarecord)
+            if metadata:
+                header = Message_Header(metadata,0)
+                self.redundant = header.channel
+                self.metadata = metadata
+                self._rda_build()
+                out =  {
+                "build":self.build,
+                }
+            else:
+                print INCOMP_ERR_MSG
+                out = {"build":False,"err":(INCOMP_ERR_MSG)} 
+            raw_file.close() 
             return out
         except Exception as error:
             print ("Error retrieving RDA Build ", self.filename, error)
@@ -138,25 +144,32 @@ class Radial(object):
  
     def process_volume(self):
         try:
-            with open(self.filename, 'rb') as raw_file:
-                raw_file.seek(VOLUME_HEADER_SIZE)
-                control_word = raw_file.read(CONTROL_WORD_SIZE)
-                metarecord_size = abs(unpack('>i', control_word)[0])
-                raw_file.seek(MESSAGE_HEADER_SIZE+RPG_ADDED_BYTES)
-                metarecord = raw_file.read(metarecord_size)
-                metadata = bz2.decompress(metarecord)
-                if metadata:
-                    header = Message_Header(metadata,0)
-                    self.redundant = header.channel
-                    self.metadata = metadata
+            raw_file = urlopen(self.filename)
+            raw_file.read(VOLUME_HEADER_SIZE)
+            control_word = raw_file.read(CONTROL_WORD_SIZE)
+            metarecord_size = abs(unpack('>i', control_word)[0])
+            metarecord = raw_file.read(metarecord_size)
+            self._pos += VOLUME_HEADER_SIZE + CONTROL_WORD_SIZE + metarecord_size 
+            metadata = bz2.decompress(metarecord)
+            if metadata:
+                header = Message_Header(metadata,0)
+                self.redundant = header.channel
+                print header.msg_type
+                if header.msg_type == 31:
+                    self.chunk = metadata
+                    self._process_chunk
+                    self.build = -99
+                else:
+                    self.metadata = metadata 
                     self._rda_build()
-                while raw_file.tell() != os.fstat(raw_file.fileno()).st_size:
-                    control_word = raw_file.read(CONTROL_WORD_SIZE)
-                    size = abs(unpack('>i', control_word)[0])
-                    data = raw_file.read(size)
-                    self.chunk = bz2.decompress(data)
-                    if self.chunk:
-                        self._process_chunk()
+            while self._pos < int(raw_file.info()['Content-Length']):
+                control_word = raw_file.read(CONTROL_WORD_SIZE)
+                size = abs(unpack('>i', control_word)[0])
+                data = raw_file.read(size)
+                self._pos += CONTROL_WORD_SIZE + size
+                self.chunk = bz2.decompress(data)
+                if self.chunk:
+                    self._process_chunk()
             if self.elevations:
                 self._calc_rate()
                 out =  {
@@ -170,6 +183,7 @@ class Radial(object):
             else:
                 print INCOMP_ERR_MSG
                 out = {"VCP":False,"err":(INCOMP_ERR_MSG)}
+            raw_file.close()
             return out
         except Exception as error:
             print ("Error processing this volume ", self.filename, error)
@@ -269,7 +283,7 @@ def main():
         return 1 
     else:
         r = Radial(args.filename,args.precision)
-        return r.retrieve_build()
+        return r.process_volume()
 
 if __name__ == "__main__":
     sys.exit(main())

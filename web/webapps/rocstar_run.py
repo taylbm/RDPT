@@ -26,7 +26,7 @@ from rocstar_handlers import *
 
 SESSION_DIR = '/tmp/rocstar'            # change "my_app_name" to your application name
 URLS = (
-    '/','rocstar_handlers.rxr_noise',
+    '/rxr','rocstar_handlers.rxr_noise',
     '/plot_all','rocstar_handlers.plot_all',
     '/vols','rocstar_handlers.volumes',
     '/days','rocstar_handlers.days',

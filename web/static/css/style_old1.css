@@ -171,3 +171,6 @@ body{ letter-spacing: 0px; }
 .details-container #start-date-container { width:90px; height:40px;font-weight:400; display:inline-block; } 
 .details-container #end-date-container { width:90px; height:40px;font-weight:400; display:inline-block; }
 .details-container .canvasjs-chart-credit { color:white !important; }  
+.source-slider .ui-slider {
+    width: 11em;
+}
