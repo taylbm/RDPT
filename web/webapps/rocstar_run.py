@@ -10,6 +10,7 @@ import datetime
 HERE = os.path.split(os.path.abspath(__file__))[0]     # looks awful, but gets the parent dir
 PARENT = os.path.split(HERE)[0]
 sys.path.append(PARENT+"/deps")
+sys.path.append(PARENT+"/webapps")
 
 MODULE_CACHE_DIR = '/tmp/rocstar/mako_modules'      # change "my_app_name" to your application name
 
@@ -26,7 +27,7 @@ from rocstar_handlers import *
 
 SESSION_DIR = '/tmp/rocstar'            # change "my_app_name" to your application name
 URLS = (
-    '/rxr','rocstar_handlers.rxr_noise',
+    '/','rocstar_handlers.rxr_noise',
     '/plot_all','rocstar_handlers.plot_all',
     '/vols','rocstar_handlers.volumes',
     '/days','rocstar_handlers.days',

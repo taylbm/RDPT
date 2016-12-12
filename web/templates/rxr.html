@@ -6,17 +6,17 @@
 		<meta name="author" content="Brandon Taylor">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon" />
-		<link rel="stylesheet" type="text/css" href="static/css/style_old1.css">
-                <link rel="stylesheet" href="static/css/jqm.min.css" />
-                <link rel="stylesheet" href="static/css/jquery.mobile.icons.min.css" />
-  		<link rel="stylesheet" href="static/js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
-		<link rel="stylesheet" href="static/air-datepicker-master/dist/css/datepicker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="${Prefix}static/css/style_old1.css">
+                <link rel="stylesheet" href="${Prefix}static/css/jqm.min.css" />
+                <link rel="stylesheet" href="${Prefix}static/css/jquery.mobile.icons.min.css" />
+  		<link rel="stylesheet" href="${Prefix}static/js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
+		<link rel="stylesheet" href="${Prefix}static/air-datepicker-master/dist/css/datepicker.min.css"/>
 	</head>
 	<body>
 		<div data-role="page" data-url="home" class="container">
                     <div data-role="header" id="detailsHeader" style="overflow:hidden;background-color:white">
         	        <div class="" style="width:25%; display:inline-block;">
-            	 	     <img style="height:50px" src="static/img/ROC_logo.png">
+            	 	     <img style="height:50px" src="${Prefix}static/img/ROC_logo.png">
         	        </div>
                         <h1 style="display:inline-block;" id="detailsTitle">Radial Data Plotting Tool</h1>
                         <p style="display:inline-block;margin:0px;color:white;text-shadow: 0 1px 1px black;">Level-2 Source:</p>
@@ -130,10 +130,10 @@
 
 		<!--! end of #container -->
 		<script id="plot-data"></script>
-                <script type="text/javascript" src="static/canvasjs-1.8.1/canvasjs.min.js"></script>                
+                <script type="text/javascript" src="${Prefix}static/canvasjs-1.8.1/canvasjs.min.js"></script>                
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
-                <script src="static/air-datepicker-master/dist/js/datepicker.min.js"></script>
-                <script src="static/air-datepicker-master/dist/js/i18n/datepicker.en.js"></script>
-		<script src="static/js/radial_plotting.js"></script>
+                <script src="${Prefix}static/air-datepicker-master/dist/js/datepicker.min.js"></script>
+                <script src="${Prefix}static/air-datepicker-master/dist/js/i18n/datepicker.en.js"></script>
+		<script src="${Prefix}static/js/radial_plotting.js"></script>
 	</body>

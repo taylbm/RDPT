@@ -1,3 +1,4 @@
+PREFIX = 'rxr'
 function WMA( array, weightedPeriod ) {
     var weightedArray = [];
     for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
@@ -31,7 +32,7 @@ function autoAxis(type,recalc) {
 BUILD_COLORS = {"16.1":"lightpink","17":"greenyellow","17.1":"lightgreen","17.2":"lightseagreen","18":"cyan"}
 
 function getBuilds(){
-    $.getJSON('/builds',function(data) {
+    $.getJSON(PREFIX + '/builds',function(data) {
         $.each(data,function(idx,val) { 
             if (BUILD_COLORS[val.toString()] != undefined)
                 $('#'+idx).css('background',BUILD_COLORS[val.toString()]);
@@ -69,7 +70,7 @@ function getBuilds(){
  	function getVols(d) {
 	    fd = d;
 	    $('.ui-loader').css('display','initial')
-	    $.getJSON('/vols?ICAO='+ICAO+'&date='+fd) 
+	    $.getJSON(PREFIX + '/vols?ICAO='+ICAO+'&date='+fd) 
 		.done(function(data) { 
 		var innerHTML = '<select id="selectVolume" data-mini="true" name="selectVolume">' 
                 if (data['err'] == undefined) {
@@ -333,7 +334,7 @@ function getBuilds(){
             }
 	    $('.ui-loader').css('display','initial')
 	    $('.Vol').addClass('ui-disabled') 
-	    $.getJSON(typeString+loadString+sourceString,function(data) {
+	    $.getJSON(PREFIX + typeString+loadString+sourceString,function(data) {
 		if (data["VCP"]) {
 		    redundant = data["redundant"] > 8 ? "_Ch" + (data["redundant"] - 8).toString() : ""
 		    ds = fd.split('/')
@@ -412,7 +413,6 @@ function getBuilds(){
 	    fullchart.options.title.fontSize = 40;
 	    fullchart.options.subtitles[0].fontSize = 30;
 	    $('#fullscreen-plot').height($(document).height())
-            $.getJSON("/blank?name=fullscreen")
 	});
 	$(":mobile-pagecontainer").on( "pagecontainershow", function( event, ui ) {
 	    fullchart.render()
@@ -481,9 +481,6 @@ function getBuilds(){
             cut = $(this).attr("id")
             var type = $('input[name="typeSelect"]:checked').val();
             plotSwitch(cut,type);
-        });
-        $('.canvasjs-chart-toolbar').on("click",function() { 
-            $.getJSON('/blank?name=exportClick')
         });
         $('#elAz').prop("checked","true");
         $('input[name="typeSelect"]').checkboxradio('refresh');

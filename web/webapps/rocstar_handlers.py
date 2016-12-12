@@ -40,20 +40,11 @@ def gzip_response(resp):
     web.webapi.header('Vary','Accept-Encoding',unique=True)
     return data
 
-class details(object):
-    def GET(self):
-	data = web.input()
-	if data:	
-	    if data.ICAO in icao_list:
-                return LOOKUP.detail(**{'ICAO':data.ICAO,'ICAO_list':icao_list,'KCRI_list':KCRI_list})
-	    else:	
-                return LOOKUP.detail(**{'ICAO':data.ICAO,'ICAO_list':icao_list,'KCRI_list':KCRI_list})
-	else:
-	    return LOOKUP.detail(**{'ICAO':'Please Select an ICAO','ICAO_list':icao_list,'KCRI_list':KCRI_list}) 
-
 class rxr_noise(object):
     def GET(self):
-        return LOOKUP.rxr(**{'ICAO_list':icao_list,'KCRI_list':KCRI_list}) 
+        script_name = web.ctx.env.get("SCRIPT_NAME")
+        url_prefix = script_name if script_name == '' else script_name + '/'
+        return LOOKUP.rxr(**{'ICAO_list':icao_list,'KCRI_list':KCRI_list,'Prefix':url_prefix}) 
 
 class randomData(object):
     def GET(self):
