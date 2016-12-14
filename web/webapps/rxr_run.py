@@ -17,16 +17,14 @@ Configure(
     module_cache_dir = MODULE_CACHE_DIR
 )
 
-from rocstar_handlers import *
+from rxr_handlers import *
 
-SESSION_DIR = '/tmp/rocstar'            # change "my_app_name" to your application name
 URLS = (
-    '/','rocstar_handlers.rxr',
-    '/plot_all','rocstar_handlers.plot_all',
-    '/vols','rocstar_handlers.volumes',
-    '/days','rocstar_handlers.days',
-    '/blank','rocstar_handlers.blank_request',
-    '/builds','rocstar_handlers.builds',
+    '/','rxr_handlers.rxr',
+    '/plot_all','rxr_handlers.plot_all',
+    '/vols','rxr_handlers.volumes',
+    '/days','rxr_handlers.days',
+    '/builds','rxr_handlers.builds',
     '/(js|css|images)/(.*)','static'      
 )
 

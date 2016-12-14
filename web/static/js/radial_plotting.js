@@ -1,4 +1,9 @@
 PREFIX = 'rxr'
+BUILD_COLORS = {"16.1":"lightpink","17":"greenyellow","17.1":"lightgreen","17.2":"lightseagreen","18":"cyan"}
+
+/** 
+ * Performs a Weighted Moving Average
+ */
 function WMA( array, weightedPeriod ) {
     var weightedArray = [];
     for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
@@ -10,6 +15,10 @@ function WMA( array, weightedPeriod ) {
     }
     return weightedArray;
 }
+
+/**
+ * Custom Auto handling of axes scaling
+ */
 function autoAxis(type,recalc) {
     if ($('input[name="autoAxis"]').is(':checked') || recalc)
         max0 = Math.round(Math.max.apply(null,chart.options.data[0].dataPoints.map(function(obj) {return obj.y}))) + 1,
@@ -29,8 +38,11 @@ function autoAxis(type,recalc) {
     ;
     chart.render();
 }
-BUILD_COLORS = {"16.1":"lightpink","17":"greenyellow","17.1":"lightgreen","17.2":"lightseagreen","18":"cyan"}
 
+/**
+ * Retrieves the latest Build for the latest available volume for 
+ * each site
+ */
 function getBuilds(){
     $.getJSON(PREFIX + '/builds',function(data) {
         $.each(data,function(idx,val) { 
@@ -41,8 +53,8 @@ function getBuilds(){
         }); 
     });
 }
-    $(document).ready(function(){
-	var ICAO = "KABR",
+(document).ready(function(){
+	var icao = "KABR",
 	    now = new Date(),
 	    nowArr = now.toJSON().slice(0,10).split('-'),
 	    fd = nowArr[1] + "/" + nowArr[2] + "/" + nowArr[0],
@@ -54,12 +66,12 @@ function getBuilds(){
 	    storeData = {},
             days = {}
 	;
-        ICAO = $('select[name="selectICAO"] :selected').val();
-        $('select[name="selectICAO"]').val(ICAO).selectmenu('refresh');
+        icao = $('select[name="selectICAO"] :selected').val();
+        $('select[name="selectICAO"]').val(icao).selectmenu('refresh');
         function getDays() {
             $.ajax({
-                url: '/days?ICAO='+ICAO,
-                async: false,
+                url: PREFIX + '/days?icao='+icao,
+                async: true,
                 success: function(data) {
                     days = $.parseJSON(data)
                 }
@@ -67,10 +79,13 @@ function getBuilds(){
         }
         getDays();
         getBuilds();     
+        /**
+        * Builds the volume list dropdown
+        */
  	function getVols(d) {
 	    fd = d;
 	    $('.ui-loader').css('display','initial')
-	    $.getJSON(PREFIX + '/vols?ICAO='+ICAO+'&date='+fd) 
+	    $.getJSON(PREFIX + '/vols?icao='+icao+'&date='+fd) 
 		.done(function(data) { 
 		var innerHTML = '<select id="selectVolume" data-mini="true" name="selectVolume">' 
                 if (data['err'] == undefined) {
@@ -131,8 +146,9 @@ function getBuilds(){
 		]
 	    })
 	;
+        /*
         function daysAvailable(data,cellType) {
-            var monthString = ICAO + '.' + (data.getFullYear()).toString() + '.' + data.toISOString().substr(5,2)
+            var monthString = icao + '.' + (data.getFullYear()).toString() + '.' + data.toISOString().substr(5,2)
             if (cellType == "day") {
                 if(!days[monthString]) {
                     return {disabled:true}  
@@ -144,13 +160,14 @@ function getBuilds(){
                 }
             } 
         }
+        */
         $('#date-pick').datepicker({
             todayButton: new Date(),
             autoClose: true,
             minDate: new Date(2014,12),
             maxDate: new Date(),
-            onSelect: getVols,
-            onRenderCell: daysAvailable
+            onSelect: getVols
+            //onRenderCell: daysAvailable
         });
 	$('#date-pick').datepicker().data('datepicker').selectDate(now)
 	function plotSwitch(cut,type,typeSelect){
@@ -169,7 +186,7 @@ function getBuilds(){
                 var subtext = "VCP:" + storeData["VCP"] + " | RDA Build Number:" + storeData["build"] 
             }
             chart.options.subtitles[0].text = subtext;
-	    chart.options.exportFileName = ICAO + redundant + "_" + type + "_VCP" + storeData["VCP"].toString() + "_Cut" + cut + "_" + ds[2] + ds[0] + ds[1] + "_" + disp;
+	    chart.options.exportFileName = icao + redundant + "_" + type + "_VCP" + storeData["VCP"].toString() + "_Cut" + cut + "_" + ds[2] + ds[0] + ds[1] + "_" + disp;
 	    if (type == "RxRN") {
 		if (cut != "All") {
 		    chart.options.data[0].toolTipContent = "Azimuth Angle: {x}\u00B0 | Noise: {y} dBm";
@@ -321,7 +338,7 @@ function getBuilds(){
             autoAxis(type == "RxRN" || type == "Az", typeSelect || $( "#main-plot .canvasjs-chart-credit" ).length == 0)
 	}
 	function plotData(type) {
-	    var loadString = '?ICAO='+ICAO+'&date='+fd+'&fname='+fname;
+	    var loadString = '?icao='+icao+'&date='+fd+'&fname='+fname;
 	    var typeString = '/plot_all';
             var source =  $('#source-switch').val() == "true";
             sourceString = source ? "&source=ENG" : "&source=AS3"; 
@@ -338,8 +355,8 @@ function getBuilds(){
 		if (data["VCP"]) {
 		    redundant = data["redundant"] > 8 ? "_Ch" + (data["redundant"] - 8).toString() : ""
 		    ds = fd.split('/')
-		    chart.options.exportFileName = ICAO + redundant + "_" + type + "_VCP" + data["VCP"].toString() + "_Cut" + cut + "_" + ds[2] + ds[0] + ds[1] + "_" + disp;
-		    chart.options.title.text = ICAO + redundant + '|' + fd + '|' + disp;
+		    chart.options.exportFileName = icao + redundant + "_" + type + "_VCP" + data["VCP"].toString() + "_Cut" + cut + "_" + ds[2] + ds[0] + ds[1] + "_" + disp;
+		    chart.options.title.text = icao + redundant + '|' + fd + '|' + disp;
 		    var innerHTML = '<fieldset data-role="controlgroup" data-mini="true">Cut Selection';
 		    innerHTML += '<input class="cut" name="cut" id="All" type="radio"><label for="All">All</label>'
 		    var cuts = Object.keys(data["elevations"]);
@@ -473,7 +490,7 @@ function getBuilds(){
             ;
         });
         $('select[name="selectICAO"]').on('change',function() {
-            ICAO = $(this).val()
+            icao = $(this).val()
             getDays()
             $('#date-pick').datepicker().data('datepicker').selectDate(now)
         });
@@ -482,6 +499,7 @@ function getBuilds(){
             var type = $('input[name="typeSelect"]:checked').val();
             plotSwitch(cut,type);
         });
+        // Set page defaults
         $('#elAz').prop("checked","true");
         $('input[name="typeSelect"]').checkboxradio('refresh');
         $('#source-switch').val('true').slider('refresh')
